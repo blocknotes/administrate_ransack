@@ -24,6 +24,7 @@ Gem::Specification.new do |spec|
   spec.files = Dir['{app,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   spec.add_dependency 'administrate', '~> 0.14.0'
+  spec.add_dependency 'ransack', '~> 2.3.2'
 
   spec.add_development_dependency 'rubocop', '~> 0.90'
 end
