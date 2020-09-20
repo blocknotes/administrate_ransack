@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'administrate_ransack/engine'
-require_relative '../app/controllers/administrate_ransack/concerns/searchable'
+require 'administrate_ransack/searchable'
 
 module AdministrateRansack
 end
