@@ -17,8 +17,17 @@ prepend AdministrateRansack::Searchable
 <%= render('administrate_ransack/filters', attribute_types: page.attribute_types) %>
 ```
 
+## Notes
+- For associations (has many/belongs to) the label used can be customized adding an `admin_label` method to the target model which returns a string.
+- Administrate Search input works independently from Ransack searches, I suggest to disable it eventually
+- Ordering by clicking on the headers of the table preserving the Ransack searches requires a change to the headers links, replacing the th links of *_collection* partial with:
+```rb
+sort_link(@ransack_results, attr_name) do
+# ...
+```
+
 ## Customizations
-- Setup the fields for the filters in the index view:
+- Allow only some fields for the filters in the index view:
 ```erb
 <% attribute_types = {
   author: Administrate::Field::BelongsTo,
@@ -30,7 +39,7 @@ prepend AdministrateRansack::Searchable
   attribute_types: attribute_types
 ) %>
 ```
-- Optionally setup the layout for filters as a sidebar:
+- Optional basic style to setup the filters as a sidebar:
 ```css
 .main-content__body {
   display: inline-block;
@@ -54,8 +63,8 @@ prepend AdministrateRansack::Searchable
 }
 ```
 
-## Notes
-- For associations (has many/belongs to) the label used can be customized adding an `admin_label` method to the target model which returns a string
+Screenshot:
+![screenshot](screenshot.png)
 
 ## Do you like it? Star it!
 If you use this component just star it. A developer is more motivated to improve a project when there is some interest.
