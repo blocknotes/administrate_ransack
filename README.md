@@ -17,8 +17,21 @@ prepend AdministrateRansack::Searchable
 <%= render('administrate_ransack/filters', attribute_types: page.attribute_types) %>
 ```
 
+## Usage
+For associations (has many/belongs to) the label used can be customized adding an `admin_label` method to the target model which returns a string while the collection can by filtered with `admin_scope`.
+
+Example:
+```rb
+class Post < ApplicationRecord
+  scope :admin_scope, -> { where(published: true) }
+
+  def admin_label
+    title.upcase
+  end
+end
+```
+
 ## Notes
-- For associations (has many/belongs to) the label used can be customized adding an `admin_label` method to the target model which returns a string.
 - Administrate Search input works independently from Ransack searches, I suggest to disable it eventually
 - Ordering by clicking on the headers of the table preserving the Ransack searches requires a change to the headers links, replacing the th links of *_collection* partial with:
 ```rb

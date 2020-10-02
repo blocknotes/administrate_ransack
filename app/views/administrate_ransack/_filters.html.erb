@@ -10,12 +10,13 @@
           <% association = @ransack_results.klass.reflections[field.to_s] %>
           <% if association %>
             <% label = association.klass.method_defined?(:admin_label) ? :admin_label : :to_s %>
+            <% collection = association.klass.send(association.klass.respond_to?(:admin_scope) ? :admin_scope : :all) %>
             <%= f.label field %>
-            <%= f.collection_select "#{field}_id_eq", association.klass.all, :id, label, include_blank: true %>
+            <%= f.collection_select "#{field}_id_eq", collection, :id, label, include_blank: true %>
           <% end %>
         <% when 'Administrate::Field::Boolean' %>
           <%= f.label field %>
-          <%= f.select "#{field}_eq", [['no', false], ['yes', true]], include_blank: true %>
+          <%= f.select "#{field}_eq", [[t('administrate_ransack.filters.no'), false], [t('administrate_ransack.filters.yes'), true]], include_blank: true %>
         <% when 'Administrate::Field::Date' %>
           <%= f.label field %>
           <%= f.date_field "#{field}_gteq" %>
@@ -34,8 +35,9 @@
           <% association = @ransack_results.klass.reflections[field.to_s] %>
           <% if association %>
             <% label = association.klass.method_defined?(:admin_label) ? :admin_label : :to_s %>
+            <% collection = association.klass.send(association.klass.respond_to?(:admin_scope) ? :admin_scope : :all) %>
             <%= f.label field %>
-            <%= f.collection_check_boxes "#{field}_id_in", association.klass.all, :id, label do |b| %>
+            <%= f.collection_check_boxes "#{field}_id_in", collection, :id, label do |b| %>
               <%= b.label do %>
                 <%= b.check_box %>
                 <span><%= b.object.send(label) %></span>
