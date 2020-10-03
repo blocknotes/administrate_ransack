@@ -1,4 +1,4 @@
-# Administrate Ransack [![Gem Version](https://badge.fury.io/rb/administrate_ransack.svg)](https://badge.fury.io/rb/administrate_ransack)
+# Administrate Ransack [![Gem Version](https://badge.fury.io/rb/administrate_ransack.svg)](https://badge.fury.io/rb/administrate_ransack) [![CircleCI](https://circleci.com/gh/blocknotes/administrate_ransack.svg?style=svg)](https://circleci.com/gh/blocknotes/administrate_ransack)
 A plugin for [Administrate](https://github.com/thoughtbot/administrate) to use [Ransack](https://github.com/activerecord-hackery/ransack) for filtering resources.
 
 Features:
