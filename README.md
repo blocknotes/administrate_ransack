@@ -42,14 +42,21 @@ sort_link(@ransack_results, attr_name) do
 ## Customizations
 - Allow only some fields for the filters in the index view:
 ```erb
-<% attribute_types = {
-  author: Administrate::Field::BelongsTo,
+<%
+attribute_types = {
   title: Administrate::Field::String,
+  author: Administrate::Field::BelongsTo,
   published: Administrate::Field::Boolean
-} %>
+}
+attribute_labels = {
+  author: 'Written by',
+  title: nil
+}
+%>
 <%= render(
   'administrate_ransack/filters',
-  attribute_types: attribute_types
+  attribute_types: attribute_types,
+  attribute_labels: attribute_labels
 ) %>
 ```
 - Optional basic style to setup the filters as a sidebar:
