@@ -14,13 +14,15 @@ RSpec.describe 'Administrate Ransack', type: :system do
   it 'checks that filters bar is present' do
     visit '/admin/posts'
 
+    # Look for some filter elements
     expect(page).to have_css('form#post_search')
     expect(page).to have_css('select#q_author_id_eq')
     expect(page).to have_css('input#q_title_cont')
     expect(page).to have_css('select#q_published_eq')
   end
 
-  it 'filters the posts' do
+  # check string filters
+  it 'filters the posts by title' do
     visit '/admin/posts'
 
     expect(page).to have_css('a.action-show', text: post.title)
@@ -28,12 +30,21 @@ RSpec.describe 'Administrate Ransack', type: :system do
 
     fill_in('q[title_cont]', with: 'another')
     find('input[type="submit"]').click
+
     expect(page).not_to have_css('a.action-show', text: post.title)
     expect(page).to have_css('a.action-show', text: post2.title)
+  end
 
-    fill_in('q[title_cont]', with: '')
+  # check boolean filters
+  it 'filters the posts by title' do
+    visit '/admin/posts'
+
+    expect(page).to have_css('a.action-show', text: post.title)
+    expect(page).to have_css('a.action-show', text: post2.title)
+
     select('Yes', from: 'q[published_eq]')
     find('input[type="submit"]').click
+
     expect(page).to have_current_path %r{/admin/posts\?.+q%5Bpublished_eq%5D=true.*}
     expect(page).to have_css('a.action-show', text: post.title)
     expect(page).not_to have_css('a.action-show', text: post2.title)
