@@ -38,6 +38,13 @@ end
 sort_link(@ransack_results, attr_name) do
 # ...
 ```
+- Date/time filters use Rails `datetime_field` method which produces a `datetime-local` input field, at the moment this type of element is not broadly supported, a workaround is to include [flatpickr](https://github.com/flatpickr/flatpickr) datetime library.
+  + This gem checks if `flatpickr` function is available in the global scope and applies it to the `datetime-local` filter inputs;
+  + you can include the library using your application assets or via CDN, ex. adding to **app/views/layouts/admin/application.html.erb**:
+```js
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js"></script>
+```
 
 ## Customizations
 - Allow only some fields for the filters in the index view:
