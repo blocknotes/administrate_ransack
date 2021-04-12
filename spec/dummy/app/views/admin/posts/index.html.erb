@@ -68,6 +68,7 @@ It renders the `_table` partial to display details about the resources.
 <% attribute_types = {
   author: Administrate::Field::BelongsTo,
   title: Administrate::Field::String,
+  category: Administrate::Field::Select.with_options(collection: Post.categories.to_a),
   published: Administrate::Field::Boolean
 } %>
 

@@ -2,8 +2,8 @@
 
 RSpec.describe 'Administrate Ransack', type: :system do
   let(:author) { Author.create!(email: 'some_email@example.com', name: 'John Doe', age: 30) }
-  let!(:post) { Post.create!(title: 'A post', author: author, published: true) }
-  let!(:post2) { Post.create!(title: 'Another post', author: author) }
+  let!(:post) { Post.create!(title: 'A post', author: author, category: 'news', published: true) }
+  let!(:post2) { Post.create!(title: 'Another post', author: author, category: 'story') }
 
   after do
     post.destroy
@@ -48,5 +48,20 @@ RSpec.describe 'Administrate Ransack', type: :system do
     expect(page).to have_current_path %r{/admin/posts\?.+q%5Bpublished_eq%5D=true.*}
     expect(page).to have_css('a.action-show', text: post.title)
     expect(page).not_to have_css('a.action-show', text: post2.title)
+  end
+
+  # check select filters
+  it 'filters the posts by category' do
+    visit '/admin/posts'
+
+    expect(page).to have_css('a.action-show', text: post.title)
+    expect(page).to have_css('a.action-show', text: post2.title)
+
+    select('story', from: 'q[category_eq]')
+    find('input[type="submit"]').click
+
+    expect(page).to have_current_path %r{/admin/posts\?.+q%5Bcategory_eq%5D=story.*}
+    expect(page).not_to have_css('a.action-show', text: post.title)
+    expect(page).to have_css('a.action-show', text: post2.title)
   end
 end
