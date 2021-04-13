@@ -36,6 +36,7 @@ class PostDashboard < Administrate::BaseDashboard
     published
     dt
     category
+    created_at
   ].freeze
   # author_profile
   # post_tags
