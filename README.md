@@ -73,13 +73,6 @@ attribute_labels = {
   attribute_labels: attribute_labels
 ) %>
 ```
-- If you need to define custom search logics you can skip prepending the module (`AdministrateRansack::Searchable`) and create your own search query in a controller, ex:
-```ruby
-    def scoped_resource
-      @ransack_results = super.ransack(params[:q])
-      @ransack_results.result(distinct: true)
-    end
-```
 - Optional basic style to setup the filters as a sidebar:
 ```css
 .main-content__body {
@@ -106,6 +99,21 @@ attribute_labels = {
 
 Screenshot:
 ![screenshot](screenshot.png)
+
+## Extra notes
+- If you need to define custom search logics you can skip prepending the module (`AdministrateRansack::Searchable`) and create your own search query in a controller, ex:
+```ruby
+  def scoped_resource
+    @ransack_results = super.ransack(params[:q])
+    @ransack_results.result(distinct: true)
+  end
+```
+- Sometimes it's easier to create a new ransack field than overriding the search logic, example to search in a `jsonb` field adding to a Post model:
+```ruby
+  ransacker :keywords do
+    Arel.sql("posts.metadata ->> 'keywords'")
+  end
+```
 
 ## Do you like it? Star it!
 If you use this component just star it. A developer is more motivated to improve a project when there is some interest.
