@@ -14,7 +14,7 @@ prepend AdministrateRansack::Searchable
 ```
 - Add to your resource index view:
 ```erb
-<%= render('administrate_ransack/filters', attribute_types: page.attribute_types) %>
+<%= render('administrate_ransack/filters') %>
 ```
 - See the Customizations section to change the attributes list
 
@@ -113,6 +113,10 @@ Screenshot:
   ransacker :keywords do
     Arel.sql("posts.metadata ->> 'keywords'")
   end
+```
+- With this component you can easily link another resource applying some filters, example to add in a tag show page the link to the related posts:
+```erb
+  <%= link_to("Tag's posts", admin_posts_path('q[tags_id_in][]': page.resource.id), class: "button") %>
 ```
 
 ## Do you like it? Star it!

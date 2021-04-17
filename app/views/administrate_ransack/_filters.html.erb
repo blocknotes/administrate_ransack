@@ -11,6 +11,7 @@
 <% end %>
 
 <% attribute_labels ||= {} %>
+<% attribute_types ||= @dashboard.attribute_types.select { |key, _value| @dashboard.collection_attributes.include?(key) } %>
 <%= search_form_for [:admin, @ransack_results], html: { 'data-administrate-ransack-filters': '1' } do |f| %>
   <div class="filters">
     <% attribute_types.each do |field, type| %>
