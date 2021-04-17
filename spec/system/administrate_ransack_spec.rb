@@ -40,7 +40,7 @@ RSpec.describe 'Administrate Ransack', type: :system do
   end
 
   # check boolean filters
-  it 'filters the posts by title' do
+  it 'filters the posts by published' do
     visit '/admin/posts'
 
     select('Yes', from: 'q[published_eq]')
