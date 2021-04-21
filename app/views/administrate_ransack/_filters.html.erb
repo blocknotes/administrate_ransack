@@ -17,8 +17,10 @@
   if local_assigns.has_key?(:search_path)
     form_path = @ransack_results
     form_options[:url] = search_path
+    clear_filters_path = search_path
   else
     form_path = [:admin, @ransack_results]
+    clear_filters_path = url_for(url_for([:admin, @ransack_results.klass]))
   end
 %>
 <%= search_form_for form_path, form_options do |f| %>
@@ -81,6 +83,6 @@
 
   <div class="filters-buttons">
     <%= f.submit %>
-    <%= link_to t('administrate_ransack.filters.clear_filters'), url_for([:admin, @ransack_results.klass]), class: 'btn-clear-filters' %>
+    <%= link_to t('administrate_ransack.filters.clear_filters'), clear_filters_path, class: 'btn-clear-filters' %>
   </div>
 <% end %>
