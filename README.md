@@ -19,9 +19,12 @@ prepend AdministrateRansack::Searchable
 - See the Customizations section to change the attributes list
 
 ## Usage
-For associations (has many/belongs to) the label used can be customized adding an `admin_label` method to the target model which returns a string while the collection can by filtered with `admin_scope`.
+- The filters partial accepts some optional parameters:
+  + `attribute_labels`: hash used to override the field labels, ex. `{ title: "The title" }`
+  + `attribute_types`: hash used to specify the filter fields, ex. `{ title: Administrate::Field::String }`
+  + `search_path`: the path to use for searching (form URL)
+- For associations (has many/belongs to) the label used can be customized adding an `admin_label` method to the target model which returns a string while the collection can by filtered with `admin_scope`. Example:
 
-Example:
 ```rb
 class Post < ApplicationRecord
   scope :admin_scope, -> { where(published: true) }
@@ -54,9 +57,10 @@ end
 ```
 
 ## Customizations
-- Allow only some fields for the filters in the index view:
+- Sample with different options provided:
 ```erb
 <%
+# In alternative prepare an hash in the dashboard like RANSACK_TYPES = {}
 attribute_types = {
   title: Administrate::Field::String,
   author: Administrate::Field::BelongsTo,
@@ -70,8 +74,13 @@ attribute_labels = {
 <%= render(
   'administrate_ransack/filters',
   attribute_types: attribute_types,
-  attribute_labels: attribute_labels
+  attribute_labels: attribute_labels,
+  search_path: admin_root_path
 ) %>
+```
+- An alternative is to prepare some hashes constants in the dashboard (ex. `RANSACK_TYPES`) and then:
+```erb
+<%= render('administrate_ransack/filters', attribute_types: @dashboard.class::RANSACK_TYPES) %>
 ```
 - Optional basic style to setup the filters as a sidebar:
 ```css
