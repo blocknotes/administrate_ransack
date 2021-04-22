@@ -36,22 +36,6 @@ end
 ```
 
 ## Notes
-- **Important**: Administrate uses strong parameters also for loading the resources for index pages, this means that the query parameter used for filters (`q`) will not be accepted; so filters will works but column sorting won't. A workaround here is to override the helper in the controller, example:
-```rb
-module Admin
-  class ApplicationController < Administrate::ApplicationController
-    helper_method :sanitized_order_params
-  
-    def sanitized_order_params(page, current_field_name)
-      collection_names = page.item_includes + [current_field_name]
-      association_params = collection_names.map do |assoc_name|
-        { assoc_name => %i[order direction page per_page] }
-      end
-      params.permit(:search, :id, :page, :per_page, association_params, q: {})
-    end
-  end
-end
-```
 - Administrate Search logic works independently from Ransack searches, I suggest to disable it eventually (ex. overriding `show_search_bar?` in the controller)
 - Date/time filters use Rails `datetime_field` method which produces a `datetime-local` input field, at the moment this type of element is not broadly supported, a workaround is to include [flatpickr](https://github.com/flatpickr/flatpickr) datetime library.
   + This gem checks if `flatpickr` function is available in the global scope and applies it to the `datetime-local` filter inputs;
