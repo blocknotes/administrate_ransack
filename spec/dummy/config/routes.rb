@@ -8,4 +8,6 @@ Rails.application.routes.draw do
 
     root to: 'posts#index'
   end
+
+  root to: redirect('/admin')
 end
