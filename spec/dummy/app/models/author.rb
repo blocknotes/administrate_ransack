@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Author < ApplicationRecord
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :published_posts, -> { published }, class_name: 'Post'
   has_many :recent_posts, -> { recents }, class_name: 'Post'
   has_many :tags, through: :posts

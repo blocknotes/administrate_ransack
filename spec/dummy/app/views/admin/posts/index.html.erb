@@ -2,6 +2,31 @@
   <%= display_resource_name(page.resource_name) %>
 <% end %>
 
+<% content_for(:stylesheet) do %>
+<style>
+.main-content__body {
+  display: inline-block;
+  width: calc(100% - 320px);
+  vertical-align: top;
+}
+
+[data-administrate-ransack-filters] {
+  display: inline-block;
+  padding-left: 10px;
+  padding-top: 10px;
+  width: 300px;
+}
+
+[data-administrate-ransack-filters] .filter {
+  margin-bottom: 10px;
+}
+
+[data-administrate-ransack-filters] .filters-buttons {
+  margin-top: 30px;
+}
+</style>
+<% end %>
+
 <header class="main-content__header" role="banner">
   <h1 class="main-content__page-title" id="page-title">
     <%= content_for(:title) %>
