@@ -71,7 +71,10 @@
   category: Administrate::Field::Select.with_options(collection: Post.categories.to_a),
   published: Administrate::Field::Boolean,
   position: Administrate::Field::Number,
-  created_at: Administrate::Field::DateTime
+  dt: Administrate::Field::Date,
+  created_at: Administrate::Field::DateTime,
+  # recents: Administrate::Field::String,
+  tags: Administrate::Field::HasMany
 } %>
 
 <%= render(
