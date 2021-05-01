@@ -20,6 +20,6 @@ class Author < ApplicationRecord
   }
 
   def to_s
-    "#{name} (#{age})"
+    name
   end
 end
