@@ -1,0 +1,3 @@
+<% values = [[t('administrate_ransack.filters.no'), false], [t('administrate_ransack.filters.yes'), true]] %>
+<%= form.label(label) %>
+<%= form.select "#{field}_eq", values, include_blank: true %>
