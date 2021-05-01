@@ -1,0 +1,11 @@
+<% if association %>
+  <% desc = association.klass.method_defined?(:admin_label) ? :admin_label : :to_s %>
+  <% collection = association.klass.send(association.klass.respond_to?(:admin_scope) ? :admin_scope : :all) %>
+  <%= form.label(label) %>
+  <%= form.collection_check_boxes "#{field}_id_in", collection, :id, desc do |b| %>
+    <%= b.label do %>
+      <%= b.check_box %>
+      <span><%= b.object.send(desc) %></span>
+    <% end %>
+  <% end %>
+<% end %>
