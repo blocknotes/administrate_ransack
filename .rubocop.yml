@@ -1,10 +1,18 @@
 inherit_from:
   - https://relaxed.ruby.style/rubocop.yml
 
+require:
+  - rubocop-packaging
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+
 AllCops:
+  TargetRubyVersion: 2.7
   Exclude:
     - bin/*
     - spec/dummy/**/*
+    - vendor/**/*
   NewCops: enable
 
 Gemspec/RequiredRubyVersion:
@@ -16,6 +24,20 @@ Naming/FileName:
 Layout/LineLength:
   Enabled: true
   Max: 120
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/ImplicitSubject:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  # Default is 1
+  Max: 5
+
+RSpec/NestedGroups:
+  # Default is 3
+  Max: 6
 
 Style/HashEachMethods:
   Enabled: true

@@ -29,7 +29,7 @@ def setup_data
   Rails.application.load_seed
   author = Author.find_by!(name: 'A test author')
   tag = Tag.find_by!(name: 'A test tag')
-  Post.first.update!(title: 'A post', author: author, category: 'news', published: true, dt: Date.today)
+  Post.first.update!(title: 'A post', author: author, category: 'news', published: true, dt: Time.zone.today)
   Post.second.update!(title: 'Another post', author: author, category: 'story', dt: Date.yesterday, tags: [tag])
   Post.third.update!(title: 'Last post', author: author, category: 'news', position: 234, dt: Date.tomorrow)
 end
