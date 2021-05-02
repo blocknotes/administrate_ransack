@@ -1,0 +1,9 @@
+---
+exclude_paths:
+  - spec/dummy
+  - vendor
+
+detectors:
+  TooManyStatements:
+    # default 5
+    max_statements: 10
