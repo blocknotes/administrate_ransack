@@ -5,12 +5,18 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gemspec
 
-gem 'pry-rails'
+# Linters
+gem 'brakeman'
+gem 'fasterer'
+gem 'reek'
 gem 'rubocop'
 gem 'rubocop-packaging'
 gem 'rubocop-performance'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'
+
+# Tools
+gem 'pry-rails'
 
 group :test do
   gem 'activestorage', '~> 6.0'

@@ -1,0 +1,13 @@
+runner:
+  brakeman:
+    cmd: bundle exec brakeman
+    level: error
+  fasterer:
+    cmd: bundle exec fasterer
+    level: error
+  reek:
+    cmd: bundle exec reek
+    level: error
+  rubocop:
+    cmd: bundle exec rubocop
+    level: error

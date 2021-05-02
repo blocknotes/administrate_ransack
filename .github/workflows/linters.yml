@@ -1,0 +1,38 @@
+name: Linters
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  reviewdog:
+    name: reviewdog
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - uses: reviewdog/action-setup@v1
+        with:
+          reviewdog_version: latest
+      - name: Run reviewdog
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          reviewdog -fail-on-error -reporter=github-pr-review -runners=brakeman,reek,rubocop
+        # fasterer used as external action due to some issues as reviewdog runner
+
+      - name: Run Fasterer
+        uses: vk26/action-fasterer@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review
