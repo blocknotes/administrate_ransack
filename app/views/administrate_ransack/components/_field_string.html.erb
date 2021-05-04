@@ -1,2 +1,3 @@
+<% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_cont" %>
 <%= form.label(label) %>
-<%= form.search_field("#{field}_cont") %>
+<%= form.search_field(field_key) %>
