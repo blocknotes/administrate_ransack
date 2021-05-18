@@ -51,4 +51,8 @@ RSpec.configure do |config|
   config.before(:suite) do
     SpecHelpers.setup_data
   end
+
+  config.before(:each, type: :system) do
+    Capybara.page.current_window.resize_to(1600, 1200)
+  end
 end
