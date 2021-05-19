@@ -13,8 +13,8 @@ class Post < ApplicationRecord
 
   validates :title, allow_blank: false, presence: true
 
-  scope :published, -> { where(published: true) }
-  scope :recents, ->(dt = 1.month.ago) { where('created_at > ?', dt).order(created_at: :desc) }
+  scope :recents, ->(dt = 1.month.ago) { where('dt > ?', dt).order(dt: :desc) }
+  scope :by_category, ->(category) { where(category: category) }
 
   def to_s
     title
@@ -30,7 +30,7 @@ class Post < ApplicationRecord
 
   class << self
     def ransackable_scopes(_auth_object = nil)
-      %i[published recents]
+      %i[by_category recents]
     end
   end
 end

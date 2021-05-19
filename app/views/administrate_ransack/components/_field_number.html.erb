@@ -1,2 +1,3 @@
+<% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_eq" %>
 <%= form.label(label) %>
-<%= form.number_field "#{field}_eq" %>
+<%= form.number_field(field_key) %>

@@ -30,29 +30,30 @@
       <% next if field == :id %>
 
       <% label = attribute_labels.include?(field) ? attribute_labels[field] : field %>
+      <% model = @ransack_results.klass %>
       <% input_type = type.is_a?(Administrate::Field::Deferred) ? type.deferred_class.to_s : type.to_s %>
       <div class="filter <%= input_type.parameterize %>">
         <% case input_type %>
         <% when 'Administrate::Field::BelongsTo' %>
-          <% association = @ransack_results.klass.reflections[field.to_s] %>
-          <%= render 'administrate_ransack/components/field_belongs_to', form: f, field: field, label: label, association: association %>
+          <% association = model.reflections[field.to_s] %>
+          <%= render 'administrate_ransack/components/field_belongs_to', form: f, model: model, field: field, label: label, association: association %>
         <% when 'Administrate::Field::Boolean' %>
-          <%= render 'administrate_ransack/components/field_boolean', form: f, field: field, label: label %>
+          <%= render 'administrate_ransack/components/field_boolean', form: f, model: model, field: field, label: label %>
         <% when 'Administrate::Field::Date' %>
-          <%= render 'administrate_ransack/components/field_date', form: f, field: field, label: label %>
+          <%= render 'administrate_ransack/components/field_date', form: f, model: model, field: field, label: label %>
         <% when 'Administrate::Field::DateTime' %>
-          <%= render 'administrate_ransack/components/field_datetime', form: f, field: field, label: label %>
+          <%= render 'administrate_ransack/components/field_datetime', form: f, model: model, field: field, label: label %>
         <% when 'Administrate::Field::Email', 'Administrate::Field::String', 'Administrate::Field::Text' %>
-          <%= render 'administrate_ransack/components/field_string', form: f, field: field, label: label %>
+          <%= render 'administrate_ransack/components/field_string', form: f, model: model, field: field, label: label %>
         <% when 'Administrate::Field::Number' %>
-          <%= render 'administrate_ransack/components/field_number', form: f, field: field, label: label %>
+          <%= render 'administrate_ransack/components/field_number', form: f, model: model, field: field, label: label %>
         <% when 'Administrate::Field::HasMany' %>
-          <% association = @ransack_results.klass.reflections[field.to_s] %>
-          <%= render 'administrate_ransack/components/field_has_many', form: f, field: field, label: label, association: association %>
+          <% association = model.reflections[field.to_s] %>
+          <%= render 'administrate_ransack/components/field_has_many', form: f, model: model, field: field, label: label, association: association %>
         <% when 'Administrate::Field::Select' %>
-          <%= render 'administrate_ransack/components/field_select', form: f, field: field, label: label, type: type %>
+          <%= render 'administrate_ransack/components/field_select', form: f, model: model, field: field, label: label, type: type %>
         <% else %>
-          <%= render 'administrate_ransack/components/field_other', form: f, field: field, label: label, type: type %>
+          <%= render 'administrate_ransack/components/field_other', form: f, model: model, field: field, label: label, type: type %>
         <% end %>
       </div>
     <% end %>

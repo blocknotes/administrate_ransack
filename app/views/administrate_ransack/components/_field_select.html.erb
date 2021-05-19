@@ -1,2 +1,3 @@
+<% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_eq" %>
 <%= form.label(label) %>
-<%= form.select "#{field}_eq", type.options[:collection] || [], include_blank: true %>
+<%= form.select(field_key, type.options[:collection] || [], include_blank: true) %>

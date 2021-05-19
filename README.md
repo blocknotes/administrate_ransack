@@ -29,6 +29,7 @@ prepend AdministrateRansack::Searchable
 - For associations (_has many_/_belongs to_) the label used can be customized adding an `admin_label` method to the target model which returns a string while the collection can by filtered with `admin_scope`. Example:
 
 ```rb
+# Sample post model
 class Post < ApplicationRecord
   scope :admin_scope, -> { where(published: true) }
 
@@ -36,6 +37,30 @@ class Post < ApplicationRecord
     title.upcase
   end
 end
+```
+
+- To use scopes in filters it's needed to update also the `ransackable_scopes` in the model, example:
+
+```rb
+# Sample post model
+class Post < ApplicationRecord
+  scope :recents, ->(dt = 1.month.ago) { where('dt > ?', dt).order(dt: :desc) }
+  scope :by_category, ->(category) { where(category: category) }
+
+  class << self
+    def ransackable_scopes(_auth_object = nil)
+      %i[by_category recents]
+    end
+  end
+end
+```
+
+```erb
+<!-- Sample index view -->
+<%= render(
+  'administrate_ransack/filters',
+  attribute_types: { recents: Administrate::Field::DateTime, by_category: Administrate::Field::String }
+) %>
 ```
 
 ## Notes

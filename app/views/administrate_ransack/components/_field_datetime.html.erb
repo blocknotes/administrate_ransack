@@ -1,3 +1,7 @@
 <%= form.label(label) %>
-<%= form.datetime_field "#{field}_gteq" %>
-<%= form.datetime_field "#{field}_lteq" %>
+<% if model.ransackable_scopes.include?(field) %>
+  <%= form.datetime_field(field) %>
+<% else %>
+  <%= form.datetime_field("#{field}_gteq") %>
+  <%= form.datetime_field("#{field}_lteq") %>
+<% end %>
