@@ -1,13 +1,5 @@
 <% content_for :javascript do %>
-  <script>
-    document.addEventListener('DOMContentLoaded', (_event) => {
-      if(typeof window.flatpickr === 'function') {
-        var options = window.flatpickr_filters_options;
-        if(typeof options !== 'object') options = { enableTime: true };
-        window.flatpickr('.filter [type="datetime-local"]', options);
-      }
-    });
-  </script>
+  <%= render 'administrate_ransack/components/javascript_content' %>
 <% end %>
 
 <%

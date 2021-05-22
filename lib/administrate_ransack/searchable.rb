@@ -4,6 +4,26 @@ require 'ransack'
 
 module AdministrateRansack
   module Searchable
+    def prepare_search(dashboard)
+      binding.pry
+
+      search = {}
+      # search[:attribute_labels] ||= {}
+      # search[:attribute_types] ||= dashboard.attribute_types.select do |key, _value|
+      #   dashboard.collection_attributes.include?(key)
+      # end
+      # search[:form_options] = { html: { 'data-administrate-ransack-filters': '1' } }
+      # # if local_assigns.has_key?(:search_path)
+      # #   form_path = @ransack_results
+      # #   form_options[:url] = search_path
+      # #   clear_filters_path = search_path
+      # # else
+      # #   form_path = [:admin, @ransack_results]
+      # #   clear_filters_path = url_for(url_for([:admin, @ransack_results.klass]))
+      # # end
+      search
+    end
+
     def scoped_resource
       @ransack_results = super.ransack(params[:q])
       @ransack_results.result(distinct: true)
@@ -20,7 +40,7 @@ module AdministrateRansack
 
     class << self
       def prepended(base)
-        base.helper_method :sanitized_order_params
+        base.helper_method :prepare_search, :sanitized_order_params
       end
     end
   end
