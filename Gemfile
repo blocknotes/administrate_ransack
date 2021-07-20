@@ -5,20 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 gemspec
 
-# Linters
-gem 'brakeman'
-gem 'fasterer'
-gem 'reek'
-gem 'rubocop'
-gem 'rubocop-packaging'
-gem 'rubocop-performance'
-gem 'rubocop-rails'
-gem 'rubocop-rspec'
-
-# Tools
-gem 'pry-rails'
-
-group :test do
+group :development, :test do
   gem 'activestorage', '~> 6.0'
   gem 'capybara', '~> 3.33'
   gem 'puma', '~> 4.3'
@@ -29,4 +16,15 @@ group :test do
   gem 'selenium-webdriver', '~> 3.142'
   gem 'sprockets-rails', '~> 3.2'
   gem 'sqlite3', '~> 1.4'
+
+  # Linters
+  gem 'fasterer'
+  gem 'rubocop'
+  gem 'rubocop-packaging'
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
+  gem 'rubocop-rspec'
+
+  # Tools
+  gem 'pry-rails'
 end
