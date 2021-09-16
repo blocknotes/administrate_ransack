@@ -27,6 +27,7 @@ prepend AdministrateRansack::Searchable
   + `attribute_labels`: hash used to override the field labels, ex. `{ title: "The title" }`
   + `attribute_types`: hash used to specify the filter fields, ex. `{ title: Administrate::Field::String }`
   + `search_path`: the path to use for searching (form URL)
+  + `namespace`: the namespace used by Administrate, ex. `:supervisor`
 - For associations (_has many_/_belongs to_) the label used can be customized adding an `admin_label` method to the target model which returns a string while the collection can by filtered with `admin_scope`. Example:
 
 ```rb
