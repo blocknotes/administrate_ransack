@@ -14,13 +14,14 @@
   attribute_labels ||= {}
   attribute_types ||= @dashboard.attribute_types.select { |key, _value| @dashboard.collection_attributes.include?(key) }
   form_options = { html: { 'data-administrate-ransack-filters': '1' } }
+  namespace = local_assigns[:namespace] || :admin
   if local_assigns.has_key?(:search_path)
     form_path = @ransack_results
     form_options[:url] = search_path
     clear_filters_path = search_path
   else
-    form_path = [:admin, @ransack_results]
-    clear_filters_path = url_for(url_for([:admin, @ransack_results.klass]))
+    form_path = [namespace, @ransack_results]
+    clear_filters_path = url_for(url_for([namespace, @ransack_results.klass]))
   end
 %>
 
