@@ -1,5 +1,8 @@
 # Administrate Ransack
-[![gem version](https://badge.fury.io/rb/administrate_ransack.svg)](https://badge.fury.io/rb/administrate_ransack) [![gem downloads](https://badgen.net/rubygems/dt/administrate_ransack)](https://rubygems.org/gems/administrate_ransack) [![linters](https://github.com/blocknotes/administrate_ransack/actions/workflows/linters.yml/badge.svg)](https://github.com/blocknotes/administrate_ransack/actions/workflows/linters.yml) [![specs](https://github.com/blocknotes/administrate_ransack/actions/workflows/specs.yml/badge.svg)](https://github.com/blocknotes/administrate_ransack/actions/workflows/specs.yml)
+[![gem version](https://badge.fury.io/rb/administrate_ransack.svg)](https://badge.fury.io/rb/administrate_ransack)
+[![gem downloads](https://badgen.net/rubygems/dt/administrate_ransack)](https://rubygems.org/gems/administrate_ransack)
+[![linters](https://github.com/blocknotes/administrate_ransack/actions/workflows/linters.yml/badge.svg)](https://github.com/blocknotes/administrate_ransack/actions/workflows/linters.yml)
+[![specs](https://github.com/blocknotes/administrate_ransack/actions/workflows/specs.yml/badge.svg)](https://github.com/blocknotes/administrate_ransack/actions/workflows/specs.yml)
 
 A plugin for [Administrate](https://github.com/thoughtbot/administrate) to use [Ransack](https://github.com/activerecord-hackery/ransack) for filtering resources.
 
@@ -108,7 +111,11 @@ attribute_labels = {
 ```erb
 <%= render('administrate_ransack/filters', attribute_types: @dashboard.class::RANSACK_TYPES) %>
 ```
+
+## Sample styles
+
 - Some basic style to setup the filters as a sidebar (see the screenshot below):
+
 ```css
 .main-content__body {
   display: inline-block;
@@ -133,7 +140,38 @@ attribute_labels = {
 ```
 
 Screenshot:
-![screenshot](screenshot.png)
+![screenshot](extra/screenshot.png)
+
+- Alternative styles for an horizontal search bar:
+
+```css
+[data-administrate-ransack-filters] {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+[data-administrate-ransack-filters] .filters {
+  display: inline-block;
+}
+
+[data-administrate-ransack-filters] .filter, [data-administrate-ransack-filters] .filter > label {
+  display: inline-block;
+}
+
+[data-administrate-ransack-filters] .filter > input {
+  display: inline-block;
+  width: auto;
+}
+
+[data-administrate-ransack-filters] .filters-buttons {
+  display: inline-block;
+  margin-left: 20px;
+}
+```
+
+Screenshot:
+![screenshot2](extra/screenshot2.png)
 
 ## Extra notes
 
@@ -164,6 +202,7 @@ Or consider offering me a coffee, it's a small thing but it is greatly appreciat
 ## Contributors
 
 - [Mattia Roccoberton](https://blocknot.es/): author
+- The good guys that opened issues and pull requests from time to time
 
 ## License
 
