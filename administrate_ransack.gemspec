@@ -18,4 +18,6 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'administrate', '~> 0.14'
   spec.add_runtime_dependency 'ransack', '~> 2.3'
+
+  spec.add_development_dependency 'appraisal', '~> 2.4'
 end
