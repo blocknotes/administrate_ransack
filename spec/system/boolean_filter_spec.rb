@@ -7,7 +7,8 @@ RSpec.describe 'Boolean filter', type: :system do
   it 'filters the posts by published' do
     visit '/admin/posts'
 
-    select('Yes', from: 'q[published_eq]')
+    find('.filter-published .selectize-input').click
+    find('.filter-published .option[data-value="true"]').click
     find('input[type="submit"]').click
 
     expect(page).to have_current_path %r{/admin/posts\?.+q%5Bpublished_eq%5D=true.*}

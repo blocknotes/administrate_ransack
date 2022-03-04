@@ -6,7 +6,8 @@ RSpec.describe 'Select filter', type: :system do
   it 'filters the posts by category' do
     visit '/admin/posts'
 
-    select('story', from: 'q[category_eq]')
+    find('.filter-category .selectize-input').click
+    find('.filter-category .option[data-value="story"]').click
     find('input[type="submit"]').click
 
     expect(page).to have_current_path %r{/admin/posts\?.+q%5Bcategory_eq%5D=story.*}
