@@ -9,8 +9,6 @@ class Author < ApplicationRecord
 
   has_one :profile, inverse_of: :author, dependent: :destroy
 
-  has_one_attached :avatar
-
   accepts_nested_attributes_for :profile, allow_destroy: true
 
   validates :email, format: { with: /\A[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\z/i, message: 'Invalid email' }

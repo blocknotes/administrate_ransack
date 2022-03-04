@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+Capybara.server = :puma
 Capybara.default_driver = Capybara.javascript_driver = :cuprite
 
 RSpec.configure do |config|

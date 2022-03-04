@@ -6,18 +6,15 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gemspec
 
 group :development, :test do
-  gem 'activestorage', '~> 6.0'
-  gem 'puma', '~> 4.3'
-  gem 'sassc', '~> 2.4'
-  gem 'sprockets-rails', '~> 3.2'
-  gem 'sqlite3', '~> 1.4'
+  gem 'puma'
+  gem 'sqlite3'
 
   # Testing
-  gem 'capybara', '~> 3.33'
-  gem 'cuprite', '~> 0.13'
+  gem 'capybara'
+  gem 'cuprite'
   gem 'rails-controller-testing'
-  gem 'rspec_junit_formatter', '~> 0.4'
-  gem 'rspec-rails', '~> 4.0'
+  gem 'rspec_junit_formatter'
+  gem 'rspec-rails'
 
   # Linters
   gem 'fasterer'

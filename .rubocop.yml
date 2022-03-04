@@ -11,6 +11,7 @@ AllCops:
   TargetRubyVersion: 2.7
   Exclude:
     - bin/*
+    - gemfiles/*
     - spec/dummy/**/*
     - vendor/**/*
   NewCops: enable

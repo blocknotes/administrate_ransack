@@ -52,7 +52,16 @@ RSpec.configure do |config|
     SpecHelpers.setup_data
   end
 
-  config.before(:each, type: :system) do
-    Capybara.page.current_window.resize_to(1600, 1200)
+  config.before(:suite) do
+    require 'administrate/version'
+
+    intro = ('-' * 80)
+    intro << "\n"
+    intro << "- Ruby:         #{RUBY_VERSION}\n"
+    intro << "- Rails:        #{Rails.version}\n"
+    intro << "- Administrate: #{Administrate::VERSION}\n"
+    intro << ('-' * 80)
+
+    RSpec.configuration.reporter.message(intro)
   end
 end
