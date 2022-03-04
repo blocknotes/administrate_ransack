@@ -1,11 +1,17 @@
 <% content_for :javascript do %>
   <script>
     document.addEventListener('DOMContentLoaded', (_event) => {
+      // flatpickr setup
       if(typeof window.flatpickr === 'function') {
         var options = window.flatpickr_filters_options;
         if(typeof options !== 'object') options = { enableTime: true };
         window.flatpickr('.filter [type="datetime-local"]', options);
       }
+
+      // selectize setup
+      $(function () {
+        $('.filters select').selectize();
+      });
     });
   </script>
 <% end %>
@@ -33,7 +39,7 @@
       <% label = attribute_labels.include?(field) ? attribute_labels[field] : field %>
       <% model = @ransack_results.klass %>
       <% input_type = type.is_a?(Administrate::Field::Deferred) ? type.deferred_class.to_s : type.to_s %>
-      <div class="filter <%= input_type.parameterize %>">
+      <div class="filter filter-<%= field.to_s.parameterize %> <%= input_type.parameterize %>">
         <% case input_type %>
         <% when 'Administrate::Field::BelongsTo' %>
           <% association = model.reflections[field.to_s] %>

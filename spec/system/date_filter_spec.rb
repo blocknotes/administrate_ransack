@@ -3,7 +3,7 @@
 RSpec.describe 'Date filter', type: :system do
   let(:post3) { Post.third }
 
-  it 'filters the posts by date' do
+  it 'filters the posts by date', :aggregate_failures do
     visit '/admin/posts'
 
     date = Date.tomorrow
