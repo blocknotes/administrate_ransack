@@ -1,5 +1,13 @@
 # Development
 
+## Releases
+
+```sh
+# Update lib/administrate_ransack/version.rb with the new version
+# Update the gemfiles:
+bin/appraisal
+```
+
 ## Testing
 
 ```sh

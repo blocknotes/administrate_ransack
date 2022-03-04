@@ -14,6 +14,10 @@ Gem::Specification.new do |spec|
   spec.description = 'A plugin for Administrate to use Ransack for search filters'
   spec.license     = 'MIT'
 
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = spec.homepage
+  spec.metadata['rubygems_mfa_required'] = 'true'
+
   spec.files = Dir['{app,config,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
 
   spec.add_runtime_dependency 'administrate', '~> 0.14'
