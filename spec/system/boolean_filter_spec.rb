@@ -4,7 +4,7 @@ RSpec.describe 'Boolean filter', type: :system do
   let(:post1) { Post.first }
   let(:post2) { Post.second }
 
-  it 'filters the posts by published' do
+  it 'filters the posts by published', :aggregate_failures do
     visit '/admin/posts'
 
     find('.filter-published .selectize-input').click

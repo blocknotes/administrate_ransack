@@ -6,7 +6,7 @@ RSpec.describe 'Filters bar', type: :system do
   let(:post2) { Post.second }
   let(:post3) { Post.third }
 
-  it 'checks that filters bar is present (looking for some specific elements)' do
+  it 'checks that filters bar is present (looking for some specific elements)', :aggregate_failures do
     visit '/admin/posts'
 
     expect(page).to have_css('form#post_search')

@@ -3,7 +3,7 @@
 RSpec.describe 'String filter', type: :system do
   let(:post2) { Post.second }
 
-  it 'filters the posts by title' do
+  it 'filters the posts by title', :aggregate_failures do
     visit '/admin/posts'
 
     fill_in('q[title_cont]', with: 'another')

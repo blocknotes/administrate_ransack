@@ -3,7 +3,7 @@
 RSpec.describe 'Scope filter', type: :system do
   let(:posts) { Post.where(category: 'news') }
 
-  it 'filters the posts by category (using the scope)' do
+  it 'filters the posts by category (using the scope)', :aggregate_failures do
     visit '/admin/posts'
 
     fill_in('q[by_category]', with: 'news')

@@ -3,7 +3,7 @@
 RSpec.describe 'Number filter', type: :system do
   let(:post3) { Post.third }
 
-  it 'filters the posts by position' do
+  it 'filters the posts by position', :aggregate_failures do
     visit '/admin/posts'
 
     fill_in('q[position_eq]', with: '234')

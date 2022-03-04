@@ -4,7 +4,7 @@ RSpec.describe 'Has many filter', type: :system do
   let(:post2) { Post.second }
   let(:tag) { Tag.find_by!(name: 'A test tag') }
 
-  it 'filters the posts by tag' do
+  it 'filters the posts by tag', :aggregate_failures do
     visit '/admin/posts'
 
     find("#q_tags_id_in_#{tag.id}").set(true)

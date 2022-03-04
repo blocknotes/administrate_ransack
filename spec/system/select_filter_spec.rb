@@ -3,7 +3,7 @@
 RSpec.describe 'Select filter', type: :system do
   let(:post2) { Post.second }
 
-  it 'filters the posts by category' do
+  it 'filters the posts by category', :aggregate_failures do
     visit '/admin/posts'
 
     find('.filter-category .selectize-input').click
