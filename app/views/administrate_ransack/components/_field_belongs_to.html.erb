@@ -1,3 +1,4 @@
+<% association = model.reflections[field.to_s] %>
 <% if association %>
   <% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_id_eq" %>
   <% desc = association.klass.method_defined?(:admin_label) ? :admin_label : :to_s %>
