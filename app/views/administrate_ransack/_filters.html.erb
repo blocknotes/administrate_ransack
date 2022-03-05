@@ -1,21 +1,3 @@
-<% content_for :javascript do %>
-  <script>
-    document.addEventListener('DOMContentLoaded', (_event) => {
-      // flatpickr setup
-      if(typeof window.flatpickr === 'function') {
-        var options = window.flatpickr_filters_options;
-        if(typeof options !== 'object') options = { enableTime: true };
-        window.flatpickr('.filter [type="datetime-local"]', options);
-      }
-
-      // selectize setup
-      $(function () {
-        $('.filters select').selectize();
-      });
-    });
-  </script>
-<% end %>
-
 <%
   attribute_labels ||= {}
   attribute_types ||= @dashboard.attribute_types.select { |key, _value| @dashboard.collection_attributes.include?(key) }
@@ -30,6 +12,8 @@
     clear_filters_path = url_for(url_for([namespace, @ransack_results.klass]))
   end
 %>
+
+<% render 'administrate_ransack/javascript' %>
 
 <%= search_form_for form_path, form_options do |f| %>
   <div class="filters">

@@ -1,0 +1,17 @@
+<% content_for :javascript do %>
+  <script>
+    document.addEventListener('DOMContentLoaded', (_event) => {
+      // flatpickr setup
+      if(typeof window.flatpickr === 'function') {
+        var options = window.flatpickr_filters_options;
+        if(typeof options !== 'object') options = { enableTime: true };
+        window.flatpickr('.filter [type="datetime-local"]', options);
+      }
+
+      // selectize setup
+      $(function () {
+        $('.filters select').selectize();
+      });
+    });
+  </script>
+<% end %>
