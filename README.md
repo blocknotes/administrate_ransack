@@ -3,6 +3,7 @@
 [![gem downloads](https://badgen.net/rubygems/dt/administrate_ransack)](https://rubygems.org/gems/administrate_ransack)
 [![linters](https://github.com/blocknotes/administrate_ransack/actions/workflows/linters.yml/badge.svg)](https://github.com/blocknotes/administrate_ransack/actions/workflows/linters.yml)
 [![specs](https://github.com/blocknotes/administrate_ransack/actions/workflows/specs.yml/badge.svg)](https://github.com/blocknotes/administrate_ransack/actions/workflows/specs.yml)
+[![specs Rails7](https://github.com/blocknotes/administrate_ransack/actions/workflows/specs2.yml/badge.svg)](https://github.com/blocknotes/administrate_ransack/actions/workflows/specs2.yml)
 
 A plugin for [Administrate](https://github.com/thoughtbot/administrate) to use [Ransack](https://github.com/activerecord-hackery/ransack) for filtering resources.
 
@@ -15,13 +16,17 @@ Features:
 
 - After installing Administrate, add to *Gemfile*: `gem 'administrate_ransack'` (and execute `bundle`)
 - Edit your admin resource controller adding inside the class body:
+
 ```rb
 prepend AdministrateRansack::Searchable
 ```
+
 - Add to your resource index view:
+
 ```erb
 <%= render('administrate_ransack/filters') %>
 ```
+
 - See the Usage section for extra options
 
 ## Usage
@@ -74,6 +79,7 @@ end
 - Date/time filters use Rails `datetime_field` method which produces a `datetime-local` input field, at the moment this type of element is not broadly supported, a workaround is to include [flatpickr](https://github.com/flatpickr/flatpickr) datetime library.
   + This gem checks if `flatpickr` function is available in the global scope and applies it to the `datetime-local` filter inputs;
   + you can include the library using your application assets or via CDN, ex. adding to **app/views/layouts/admin/application.html.erb**:
+
 ```html
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.css">
   <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.5.7/dist/flatpickr.min.js"></script>
@@ -87,6 +93,7 @@ end
 ## Customizations
 
 - Sample call of the filters partial with different options provided:
+
 ```erb
 <%
 # In alternative prepare an hash in the dashboard like RANSACK_TYPES = {}
@@ -107,7 +114,9 @@ attribute_labels = {
   search_path: admin_root_path
 ) %>
 ```
+
 - Another option is to prepare some hashes constants in the dashboard (ex. `RANSACK_TYPES`):
+
 ```erb
 <%= render('administrate_ransack/filters', attribute_types: @dashboard.class::RANSACK_TYPES) %>
 ```
@@ -176,19 +185,24 @@ Screenshot:
 ## Extra notes
 
 - If you need to define custom search logics you can skip prepending the module (`AdministrateRansack::Searchable`) and create your own search query in a controller (but you need to assign the Ransack search object to `@ransack_results` for the filters partial), for example:
-```ruby
+
+```rb
   def scoped_resource
     @ransack_results = super.ransack(params[:q])
     @ransack_results.result(distinct: true)
   end
 ```
+
 - Sometimes it's easier to create a new Ransack field than overriding the search logic (there are a lot of good examples in the [Ransack Wiki](https://github.com/activerecord-hackery/ransack/wiki/Using-Ransackers)), example to search in a `jsonb` field adding to a Post model:
-```ruby
+
+```rb
   ransacker :keywords do
     Arel.sql("posts.metadata ->> 'keywords'")
   end
 ```
+
 - With Administrate Ransack you can easily create links to other resources applying some filters, example to add in a tag show page the link to the related posts:
+
 ```erb
   <%= link_to("Tag's posts", admin_posts_path('q[tags_id_in][]': page.resource.id), class: "button") %>
 ```
