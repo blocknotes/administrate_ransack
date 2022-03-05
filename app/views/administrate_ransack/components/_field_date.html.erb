@@ -1,4 +1,4 @@
-<%= form.label(label) %>
+<%= form.label(label, class: 'filter-label') %>
 <% if model.ransackable_scopes.include?(field) %>
   <%= form.date_field(field, value: form.object.send(field)) %>
 <% else %>
