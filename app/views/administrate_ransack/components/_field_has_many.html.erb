@@ -1,12 +1,20 @@
+<% association = model.reflections[field.to_s] %>
 <% if association %>
   <% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_id_in" %>
   <% desc = association.klass.method_defined?(:admin_label) ? :admin_label : :to_s %>
   <% collection = association.klass.send(association.klass.respond_to?(:admin_scope) ? :admin_scope : :all) %>
-  <%= form.label(label) %>
-  <%= form.collection_check_boxes(field_key, collection, :id, desc) do |b| %>
-    <%= b.label do %>
-      <%= b.check_box %>
-      <span><%= b.object.send(desc) %></span>
+
+  <%= form.label(label, class: 'filter-label') %>
+  <% if options&.include? 'select' %>
+    <%= form.select(field_key, nil, {}, multiple: true) do %>
+      <%= options_from_collection_for_select(collection, :id, desc) %>
+    <% end %>
+  <% else %>
+    <%= form.collection_check_boxes(field_key, collection, :id, desc) do |b| %>
+      <%= b.label do %>
+        <%= b.check_box %>
+        <span><%= b.object.send(desc) %></span>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

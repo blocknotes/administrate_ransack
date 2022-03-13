@@ -1,0 +1,25 @@
+<% content_for :stylesheet do %>
+  <style>
+    .filters { padding: 0 20px; }
+    .filters label { padding-right: 20px; }
+    .filters label > span { font-weight: normal; }
+    .filters-buttons { padding: 20px; }
+    .filter-posts label { display: inline-block; }
+    .filter-posts >.filter-label { display: block; }
+  </style>
+<% end %>
+
+<section class="main-content__body main-content__body--flush">
+  <%= render(
+    "collection",
+    collection_presenter: page,
+    collection_field_name: resource_name,
+    page: page,
+    resources: resources,
+    table_title: "page-title"
+  ) %>
+
+  <%= paginate resources, param_name: '_page' %>
+</section>
+
+<%= render('administrate_ransack/filters') %>

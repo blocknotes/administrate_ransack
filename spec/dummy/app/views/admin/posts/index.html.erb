@@ -71,15 +71,16 @@
   category: Administrate::Field::Select.with_options(collection: Post.categories.to_a),
   published: Administrate::Field::Boolean,
   position: Administrate::Field::Number,
+  tags: Administrate::Field::HasMany,
   dt: Administrate::Field::Date,
   created_at: Administrate::Field::DateTime,
   recents: Administrate::Field::DateTime,
-  by_category: Administrate::Field::String,
-  tags: Administrate::Field::HasMany
+  by_category: Administrate::Field::String
 } %>
 
 <%= render(
   'administrate_ransack/filters',
-  attribute_types: attribute_types
+  attribute_types: attribute_types,
+  options: { tags: 'select' }
 ) %>
 <%# attribute_types: page.attribute_types %>
