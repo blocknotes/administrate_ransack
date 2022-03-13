@@ -21,7 +21,7 @@ Features:
 prepend AdministrateRansack::Searchable
 ```
 
-- Add to your resource index view:
+- Add to your resource index view (ex. to generate the index for a Post model: `bin/rails generate administrate:views:index Post`):
 
 ```erb
 <%= render('administrate_ransack/filters') %>
@@ -47,6 +47,13 @@ class Post < ApplicationRecord
     title.upcase
   end
 end
+```
+
+- For _has_many_ associations it is possible to use Selectize in place of the checkboxes using:
+
+```erb
+<!-- Set options for an association named: tags -->
+<%= render('administrate_ransack/filters', options: { tags: 'select' } ) %>
 ```
 
 - To use scopes in filters it's needed to update also the `ransackable_scopes` in the model, example:
