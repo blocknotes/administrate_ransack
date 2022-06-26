@@ -107,6 +107,7 @@ end
 attribute_types = {
   title: Administrate::Field::String,
   author: Administrate::Field::BelongsTo,
+  category: Administrate::Field::Select.with_options(collection: Post.categories.to_a),
   published: Administrate::Field::Boolean
 }
 attribute_labels = {
