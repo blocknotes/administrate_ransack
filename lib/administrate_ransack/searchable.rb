@@ -9,9 +9,9 @@ module AdministrateRansack
       @ransack_results.result(distinct: true)
     end
 
-    # ref => https://github.com/thoughtbot/administrate/blob/v0.15.0/app/helpers/administrate/application_helper.rb#L54-L60
+    # ref => https://github.com/thoughtbot/administrate/blob/v0.18.0/app/helpers/administrate/application_helper.rb#L72-L78
     def sanitized_order_params(page, current_field_name)
-      collection_names = page.item_includes + [current_field_name]
+      collection_names = page.item_associations + [current_field_name]
       association_params = collection_names.map do |assoc_name|
         { assoc_name => %i[order direction page per_page] }
       end
