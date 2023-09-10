@@ -1,7 +1,7 @@
 PATH
   remote: ..
   specs:
-    administrate_ransack (0.4.1)
+    administrate_ransack (0.5.0)
       administrate (~> 0.18)
       ransack (~> 2.3)
 

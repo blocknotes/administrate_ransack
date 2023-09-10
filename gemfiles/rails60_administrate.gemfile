@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 6.0.0"
+gem "selenium-webdriver", "4.1.0", require: false
 
 group :development, :test do
   gem "appraisal"
@@ -20,7 +21,6 @@ group :development, :test do
   gem "rubocop-rails"
   gem "rubocop-rspec"
   gem "pry-rails"
-  gem "selenium-webdriver", "4.1.0", require: false # Fix
 end
 
 gemspec path: "../"
