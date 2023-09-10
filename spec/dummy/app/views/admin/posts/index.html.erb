@@ -1,56 +1,34 @@
-<% content_for(:title) do %>
-  <%= display_resource_name(page.resource_name) %>
+<% content_for :stylesheet do %>
+  <style>
+    .filters { padding: 0 20px; }
+    .filters label { padding-right: 20px; }
+    .filters label > span { font-weight: normal; }
+    .filters-buttons { padding: 20px; }
+    .filter-posts label { display: inline-block; }
+    .filter-posts >.filter-label { display: block; }
+
+    .main-content__body {
+      display: inline-block;
+      width: calc(100% - 320px);
+      vertical-align: top;
+    }
+
+    [data-administrate-ransack-filters] {
+      display: inline-block;
+      padding-left: 10px;
+      padding-top: 10px;
+      width: 300px;
+    }
+
+    [data-administrate-ransack-filters] .filter {
+      margin-bottom: 10px;
+    }
+
+    [data-administrate-ransack-filters] .filters-buttons {
+      margin-top: 30px;
+    }
+  </style>
 <% end %>
-
-<% content_for(:stylesheet) do %>
-<style>
-.main-content__body {
-  display: inline-block;
-  width: calc(100% - 320px);
-  vertical-align: top;
-}
-
-[data-administrate-ransack-filters] {
-  display: inline-block;
-  padding-left: 10px;
-  padding-top: 10px;
-  width: 300px;
-}
-
-[data-administrate-ransack-filters] .filter {
-  margin-bottom: 10px;
-}
-
-[data-administrate-ransack-filters] .filters-buttons {
-  margin-top: 30px;
-}
-</style>
-<% end %>
-
-<header class="main-content__header" role="banner">
-  <h1 class="main-content__page-title" id="page-title">
-    <%= content_for(:title) %>
-  </h1>
-
-  <% if show_search_bar %>
-    <%= render(
-      "search",
-      search_term: search_term,
-      resource_name: display_resource_name(page.resource_name)
-    ) %>
-  <% end %>
-
-  <div>
-    <%= link_to(
-      t(
-        "administrate.actions.new_resource",
-        name: page.resource_name.titleize.downcase
-      ),
-      [:new, namespace, page.resource_path.to_sym],
-      class: "button",
-    ) if valid_action?(:new) && show_action?(:new, new_resource) %>
-  </div>
-</header>
 
 <section class="main-content__body main-content__body--flush">
   <%= render(
@@ -62,7 +40,7 @@
     table_title: "page-title"
   ) %>
 
-  <%= paginate resources %>
+  <%= paginate resources, param_name: '_page' %>
 </section>
 
 <% attribute_types = {
@@ -83,4 +61,3 @@
   attribute_types: attribute_types,
   options: { tags: 'select' }
 ) %>
-<%# attribute_types: page.attribute_types %>
