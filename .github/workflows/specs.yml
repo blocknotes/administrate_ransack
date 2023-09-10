@@ -15,8 +15,8 @@ jobs:
 
     strategy:
       matrix:
-        ruby: ['2.6', '2.7', '3.0']
-        gemfile: ['rails60_administrate016', 'rails60_administrate', 'rails61_administrate016', 'rails61_administrate']
+        ruby: ['2.7', '3.0']
+        gemfile: ['rails60_administrate', 'rails61_administrate']
 
     env:
       BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
