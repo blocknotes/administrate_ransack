@@ -99,6 +99,21 @@ end
 
 ## Customizations
 
+- Ransack options can be customized defining a `ransack_options` method in the controller, example:
+
+```rb
+module Admin
+  class PostsController < Admin::ApplicationController
+    prepend AdministrateRansack::Searchable
+
+    def ransack_options
+      # raises an exception on unknown parameters
+      { ignore_unknown_conditions: false }
+    end
+  end
+end
+```
+
 - Sample call of the filters partial with different options provided:
 
 ```erb
