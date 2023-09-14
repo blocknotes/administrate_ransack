@@ -5,7 +5,8 @@ require 'ransack'
 module AdministrateRansack
   module Searchable
     def scoped_resource
-      @ransack_results = super.ransack(params[:q])
+      options = respond_to?(:ransack_options) ? ransack_options : {}
+      @ransack_results = super.ransack(params[:q], **options)
       @ransack_results.result(distinct: true)
     end
 
