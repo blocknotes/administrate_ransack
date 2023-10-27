@@ -36,15 +36,14 @@ prepend AdministrateRansack::Searchable
   + `attribute_types`: hash used to specify the filter fields, ex. `{ title: Administrate::Field::String }`
   + `search_path`: the path to use for searching (form URL)
   + `namespace`: the namespace used by Administrate, ex. `:supervisor`
-- For associations (_has many_/_belongs to_) the label used can be customized adding an `admin_label` method to the target model which returns a string while the collection can by filtered with `admin_scope`. Example:
+- For associations (_has many_/_belongs to_) the label used can be customized adding an `display_resource` method to the target dashboard which returns a string. Example:
 
 ```rb
-# Sample post model
-class Post < ApplicationRecord
-  scope :admin_scope, -> { where(published: true) }
-
-  def admin_label
-    title.upcase
+class PostDashboard < Administrate::BaseDashboard
+  # Overwrite this method to customize how posts are displayed
+  # across all pages of the admin dashboard.
+  def display_resource(post)
+    "##{post.id} #{post.title&.upcase}"
   end
 end
 ```
@@ -121,9 +120,11 @@ end
 # In alternative prepare an hash in the dashboard like RANSACK_TYPES = {}
 attribute_types = {
   title: Administrate::Field::String,
+  title_or_description_cont: Administrate::Field::String,
   author: Administrate::Field::BelongsTo,
   category: Administrate::Field::Select.with_options(collection: Post.categories.to_a),
-  published: Administrate::Field::Boolean
+  published: Administrate::Field::Boolean,
+  updated_at_lteq: Administrate::Field::Date
 }
 attribute_labels = {
   author: 'Written by',

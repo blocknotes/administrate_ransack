@@ -21,7 +21,7 @@
     <% attribute_types.each do |field, type| %>
       <% next if field == :id %>
 
-      <% label = attribute_labels.include?(field) ? attribute_labels[field] : field %>
+      <% label = attribute_labels.include?(field) ? attribute_labels[field] : nil %>
       <% model = @ransack_results.klass %>
       <% input_type = type.is_a?(Administrate::Field::Deferred) ? type.deferred_class.to_s : type.to_s %>
       <% component = AdministrateRansack::FILTERS[input_type] || 'field_other' %>
