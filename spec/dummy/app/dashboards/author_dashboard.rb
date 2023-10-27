@@ -39,6 +39,16 @@ class AuthorDashboard < Administrate::BaseDashboard
   # published_posts
   # recent_posts
 
+  # RANSACK_TYPES
+  RANSACK_TYPES = {
+    posts: Field::HasMany,
+    tags: Field::HasMany,
+    name: Field::String,
+    name_or_email_cont: Field::String,
+    name_not_cont: Field::String,
+    age: Field::Number
+  }.freeze
+
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[

@@ -2,6 +2,18 @@
 
 RSpec.describe 'Number filter' do
   let(:post3) { Post.third }
+  let(:author1) { Author.first }
+
+  it 'filters the authors by age range', :aggregate_failures do
+    visit '/admin/authors'
+
+    fill_in('q[age_lteq]', with: '28')
+    find('input[type="submit"]').click
+
+    expect(page).to have_current_path %r{/admin/authors\?.+q%5Bage_lteq%5D=28.*}
+    expect(page).to have_css('.js-table-row', count: 2)
+    expect(page).to have_css('.js-table-row a.action-show', text: author1.name)
+  end
 
   it 'filters the posts by position', :aggregate_failures do
     visit '/admin/posts'

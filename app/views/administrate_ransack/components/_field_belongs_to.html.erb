@@ -1,9 +1,10 @@
 <% association = model.reflections[field.to_s] %>
 <% if association %>
-  <% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_id_eq" %>
-  <% desc = association.klass.method_defined?(:admin_label) ? :admin_label : :to_s %>
-  <% collection = association.klass.send(association.klass.respond_to?(:admin_scope) ? :admin_scope : :all) %>
+  <% field_key = AdministrateRansack.ransack?(model, {field => "1,2"}) ? field : "#{field}_id_eq" %>
+  <% label ||= AdministrateRansack.ransack?(model, {field => "1,2"}) ? field : "#{field}_id" %>
+  <% resource_field = type.new(field, nil, Administrate::Page::Collection.new(@dashboard), resource: model.new) %>
+  <% collection = resource_field.associated_resource_options %>
 
   <%= form.label(label, class: 'filter-label') %>
-  <%= form.collection_select(field_key, collection, :id, desc, include_blank: true) %>
+  <%= form.select("#{field}_id_eq", collection, { include_blank: true }, { class: 'selectize' }) %>
 <% end %>

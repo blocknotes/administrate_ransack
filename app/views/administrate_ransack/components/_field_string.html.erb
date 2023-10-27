@@ -1,4 +1,9 @@
-<% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_cont" %>
-
-<%= form.label(label, class: 'filter-label') %>
-<%= form.search_field(field_key) %>
+<% if AdministrateRansack.ransack?(model, {field => "valid"}) %>
+  <%= form.label(label || field, class: 'filter-label') %>
+  <%= form.search_field(field) %>
+<% elsif AdministrateRansack.ransack?(model, {"#{field}_cont" => "valid"}) %>
+  <%= form.label(label || "#{field}_cont", class: 'filter-label') %>
+  <%= form.search_field("#{field}_cont") %>
+<% else %>
+  <%# render nothing %>
+<% end %>
