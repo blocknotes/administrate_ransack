@@ -9,6 +9,8 @@ group :development, :test do
   gem 'appraisal'
   gem 'puma'
   gem 'sqlite3'
+  gem 'actionpack', '~> 7.0.0'
+  gem 'actionview', '~> 7.0.0'
 
   # Testing
   gem 'capybara'
