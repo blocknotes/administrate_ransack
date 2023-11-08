@@ -3,7 +3,7 @@ PATH
   specs:
     administrate_ransack (0.5.1)
       administrate (~> 0.18)
-      ransack (~> 2.3)
+      ransack (>= 2.3, < 5)
 
 GEM
   remote: https://rubygems.org/
@@ -329,6 +329,7 @@ DEPENDENCIES
   puma
   rails (~> 6.0.0)
   rails-controller-testing
+  ransack (~> 2.3)
   rspec-rails
   rspec_junit_formatter
   rubocop
