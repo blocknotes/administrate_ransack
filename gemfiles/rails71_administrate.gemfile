@@ -2,10 +2,8 @@
 
 source "https://rubygems.org"
 
-gem "psych", "~> 3.0"
-gem "rails", "~> 6.0.0"
-gem "ransack", "~> 2.3"
-gem "selenium-webdriver", "4.1.0", require: false
+gem "rails", "~> 7.1.0"
+gem "ransack", "~> 4.1", ">= 4.1.1"
 
 group :development, :test do
   gem "appraisal"
