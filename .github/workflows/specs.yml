@@ -1,5 +1,5 @@
 ---
-name: Specs
+name: Specs Rails6
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
 
     strategy:
       matrix:
-        ruby: ['2.7', '3.0']
+        ruby: ['3.0']
         gemfile: ['rails60_administrate', 'rails61_administrate']
 
     env:
@@ -23,13 +23,18 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
+
+      - name: Assets precompile
+        env:
+          RAILS_ENV: test
+        run: cd spec/dummy && bundle exec rails assets:precompile
 
       - name: Run tests
         run: bundle exec rspec --profile
