@@ -27,6 +27,24 @@ prepend AdministrateRansack::Searchable
 <%= render('administrate_ransack/filters') %>
 ```
 
+- Update your model (ex. Post) exposing the ransackable attributes and associations, skipping this step will raise an exception that explains in details:
+
+```rb
+class Post < ApplicationRecord
+  # ...
+
+  class << self
+    def ransackable_attributes(_auth_object = nil)
+      %w[title description]
+    end
+
+    def ransackable_associations(_auth_object = nil)
+      %w[author]
+    end
+  end
+end
+```
+
 - See the Usage section for extra options
 
 ## Usage
