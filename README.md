@@ -117,7 +117,7 @@ end
 
 ## Customizations
 
-- Ransack options can be customized defining a `ransack_options` method in the controller, example:
+- Ransack options can be set adding specific methods (`ransack_options` / `ransack_result_distinct`) to a resource controller, example:
 
 ```rb
 module Admin
@@ -127,6 +127,12 @@ module Admin
     def ransack_options
       # raises an exception on unknown parameters
       { ignore_unknown_conditions: false }
+    end
+
+    # by default distinct is applied on the search results
+    def ransack_result_distinct
+      # disable distinct
+      false
     end
   end
 end
