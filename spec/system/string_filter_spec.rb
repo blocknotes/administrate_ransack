@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'String filter', type: :system do
+RSpec.describe 'String filter' do
   let(:post2) { Post.second }
 
   it 'filters the posts by title', :aggregate_failures do

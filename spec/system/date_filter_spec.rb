@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Date filter', type: :system do
+RSpec.describe 'Date filter' do
   let(:post3) { Post.third }
 
   it 'filters the posts by date', :aggregate_failures do

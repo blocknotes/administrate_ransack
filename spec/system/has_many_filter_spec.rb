@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Has many filter', type: :system do
+RSpec.describe 'Has many filter' do
   let(:post2) { Post.second }
   let(:tag) { Tag.find_by!(name: 'A test tag') }
 

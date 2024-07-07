@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Number filter', type: :system do
+RSpec.describe 'Number filter' do
   let(:post3) { Post.third }
 
   it 'filters the posts by position', :aggregate_failures do
