@@ -3,6 +3,7 @@
 source "https://rubygems.org"
 
 gem "rails", "~> 6.1.0"
+gem "ransack", "~> 2.3"
 
 group :development, :test do
   gem "appraisal"
