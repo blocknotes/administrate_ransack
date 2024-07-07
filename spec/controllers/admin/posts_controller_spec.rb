@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe Admin::PostsController, type: :controller do
+RSpec.describe Admin::PostsController do
   describe "GET index" do
     it "prepares the ransack results" do
       get :index

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Select filter', type: :system do
+RSpec.describe 'Select filter' do
   let(:post2) { Post.second }
 
   it 'filters the posts by category', :aggregate_failures do

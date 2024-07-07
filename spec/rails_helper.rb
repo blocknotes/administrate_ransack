@@ -12,7 +12,7 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'selenium-webdriver'
 
-Dir[File.expand_path('support/**/*.rb', __dir__)].sort.each { |f| require f }
+Dir[File.expand_path('support/**/*.rb', __dir__)].each { |f| require f }
 
 # Force deprecations to raise an exception.
 

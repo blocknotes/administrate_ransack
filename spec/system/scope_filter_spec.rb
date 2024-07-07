@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Scope filter', type: :system do
+RSpec.describe 'Scope filter' do
   let(:posts) { Post.where(category: 'news') }
 
   it 'filters the posts by category (using the scope)', :aggregate_failures do

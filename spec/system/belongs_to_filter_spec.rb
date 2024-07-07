@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-RSpec.describe 'Belongs to filter', type: :system do
+RSpec.describe 'Belongs to filter' do
   let(:author) { Author.find_by!(name: 'A test author') }
   let(:posts) { Post.where(author: author) }
 
