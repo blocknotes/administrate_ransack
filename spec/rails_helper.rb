@@ -10,12 +10,13 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 
 require 'rspec/rails'
 require 'capybara/rails'
+require 'selenium-webdriver'
 
 Dir[File.expand_path('support/**/*.rb', __dir__)].sort.each { |f| require f }
 
 # Force deprecations to raise an exception.
 
-if (Rails.gem_version < Gem::Version.new("7.1"))
+if Rails.gem_version < Gem::Version.new("7.1")
   ActiveSupport::Deprecation.behavior = :raise
 else
   Rails.application.deprecators.behavior = :raise
@@ -45,7 +46,12 @@ module SpecHelpers
 end
 
 RSpec.configure do |config|
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
+  if Rails.gem_version < Gem::Version.new("7.1")
+    config.fixture_path = Rails.root.join('spec/fixtures').to_s
+  else
+    config.fixture_paths = [Rails.root.join('spec/fixtures').to_s]
+  end
+
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 

@@ -11,10 +11,10 @@ group :development, :test do
 
   # Testing
   gem 'capybara'
-  gem 'cuprite'
   gem 'rails-controller-testing'
   gem 'rspec_junit_formatter'
   gem 'rspec-rails'
+  gem 'selenium-webdriver'
 
   # Linters
   gem 'fasterer'
