@@ -44,10 +44,10 @@ gem 'sprockets-rails'
 
 # Testing
 gem 'capybara'
+gem 'cuprite'
 gem 'rails-controller-testing'
 gem 'rspec_junit_formatter'
 gem 'rspec-rails'
-gem 'selenium-webdriver'
 gem 'simplecov', require: false
 gem 'super_diff'
 
