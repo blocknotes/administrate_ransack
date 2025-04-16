@@ -1,13 +1,11 @@
 ---
-name: Specs Rails6
+name: Specs Rails 7.2
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
-    branches:
-      - main
+    branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   test:
@@ -15,11 +13,10 @@ jobs:
 
     strategy:
       matrix:
-        ruby: ['3.0']
-        gemfile: ['rails60_administrate', 'rails61_administrate']
+        ruby: ['3.2', '3.4']
 
     env:
-      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.gemfile }}.gemfile
+      RAILS_VERSION: 7.2
 
     steps:
       - name: Checkout repository
@@ -31,16 +28,14 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - name: Assets precompile
-        env:
-          RAILS_ENV: test
-        run: cd spec/dummy && bundle exec rails assets:precompile
+      - name: Database setup
+        run: bin/rails db:create db:migrate db:test:prepare
 
       - name: Run tests
         run: bundle exec rspec --profile
 
       - name: On failure, archive screenshots as artifacts
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: test-failed-screenshots

@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  enum :category, { 'news' => 'news', 'story' => 'story', 'gallery' => 'gallery' }
+  if Rails.gem_version < Gem::Version.new("7.0")
+    enum category: { 'news' => 'news', 'story' => 'story', 'gallery' => 'gallery' }
+  else
+    enum :category, { 'news' => 'news', 'story' => 'story', 'gallery' => 'gallery' }
+  end
 
   belongs_to :author, inverse_of: :posts, autosave: true
 
