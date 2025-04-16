@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Post < ApplicationRecord
-  enum category: { 'news' => 'news', 'story' => 'story', 'gallery' => 'gallery' }
+  enum :category, { 'news' => 'news', 'story' => 'story', 'gallery' => 'gallery' }
 
   belongs_to :author, inverse_of: :posts, autosave: true
 
