@@ -1,0 +1,17 @@
+<section class="main-content__body main-content__body--flush">
+  <%= render(
+    "collection",
+    collection_presenter: page,
+    collection_field_name: resource_name,
+    page: page,
+    resources: resources,
+    table_title: "page-title"
+  ) %>
+
+  <%= paginate resources, param_name: '_page' %>
+</section>
+
+<%= render(
+  'administrate_ransack/filters',
+  attribute_types: @dashboard.class::RANSACK_TYPES
+) %>
