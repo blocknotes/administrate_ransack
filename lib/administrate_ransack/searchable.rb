@@ -5,9 +5,10 @@ require 'ransack'
 module AdministrateRansack
   module Searchable
     def scoped_resource
-      options = respond_to?(:ransack_options) ? ransack_options : {}
+      options = respond_to?(:ransack_options, true) ? ransack_options : {}
+      distinct = respond_to?(:ransack_result_distinct, true) ? ransack_result_distinct : true
       @ransack_results = super.ransack(params[:q], **options)
-      @ransack_results.result(distinct: true)
+      @ransack_results.result(distinct: distinct)
     end
 
     # ref => https://github.com/thoughtbot/administrate/blob/v0.18.0/app/helpers/administrate/application_helper.rb#L72-L78
