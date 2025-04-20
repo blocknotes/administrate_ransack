@@ -49,6 +49,7 @@
   category: Administrate::Field::Select.with_options(collection: Post.categories.to_a),
   published: Administrate::Field::Boolean,
   position: Administrate::Field::Number,
+  position_eq: Administrate::Field::Number,
   tags: Administrate::Field::HasMany,
   dt: Administrate::Field::Date,
   created_at: Administrate::Field::DateTime,

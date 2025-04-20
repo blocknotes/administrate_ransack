@@ -1,5 +1,5 @@
-<% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_eq" %>
+<% field_key = AdministrateRansack.ransack?(model, {field => "true"}) ? field : "#{field}_eq" %>
 <% values = [[t('administrate_ransack.filters.no'), false], [t('administrate_ransack.filters.yes'), true]] %>
 
-<%= form.label(label, class: 'filter-label') %>
+<%= form.label(label || field, class: 'filter-label') %>
 <%= form.select(field_key, values, include_blank: true) %>
