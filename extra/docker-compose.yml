@@ -7,6 +7,7 @@ services:
         BUNDLER_VERSION: ${BUNDLER_VERSION}
         RUBY_IMAGE: ruby:${RUBY:-3.4}-slim
         RAILS_VERSION: ${RAILS:-}
+        RANSACK_VERSION: ${RANSACK:-}
         ADMINISTRATE_VERSION: ${ADMINISTRATE:-}
         UID: ${UID}
     user: ${UID}:${GID}

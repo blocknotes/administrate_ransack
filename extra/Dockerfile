@@ -16,16 +16,19 @@ ARG UID
 RUN useradd -u $UID --shell /bin/bash app 
 
 RUN mkdir -p /home/app && chown -R app:app /home/app
+RUN chown -R app:app /usr/local/bundle
+RUN ln -s /app/extra/.bashrc /home/app/.bashrc
 
 ARG RAILS_VERSION
 ENV RAILS_VERSION=$RAILS_VERSION
 
+ARG RANSACK_VERSION
+ENV RANSACK_VERSION=$RANSACK_VERSION
+
 ARG ADMINISTRATE_VERSION
 ENV ADMINISTRATE_VERSION=$ADMINISTRATE_VERSION
 
+USER $UID
 WORKDIR /app
 COPY . /app
 RUN bundle install
-RUN chown -R app:app /usr/local/bundle
-
-RUN ln -s /app/extra/.bashrc /home/app/.bashrc
