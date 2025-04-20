@@ -1,5 +1,8 @@
 en:
   administrate_ransack:
+    ## Optional error key
+    # errors:
+    #   invalid_search: Invalid search term!
     filters:
       'clear_filters': Clear filters
       'no': 'No'

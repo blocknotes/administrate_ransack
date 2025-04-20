@@ -5,15 +5,10 @@ require 'ransack'
 module AdministrateRansack
   module Searchable
     def scoped_resource
-      options = respond_to?(:ransack_options) ? ransack_options : {}
-      begin
-        @ransack_results = super.ransack(params[:q], **options)
-      rescue ArgumentError => e
-        handle_ransack_argument_error(e)
-        set_flash_message_as_ransack_argument_error(e)
-        @ransack_results = reset_ransack_result_on_error(super).ransack({}, **options)
-      end
-      @ransack_results.result(distinct: true)
+      options = respond_to?(:ransack_options, true) ? ransack_options : {}
+      distinct = respond_to?(:ransack_result_distinct, true) ? ransack_result_distinct : true
+      @ransack_results = prepare_search(resource_collection: super, query_params: params[:q], options: options)
+      @ransack_results.result(distinct: distinct)
     end
 
     # ref => https://github.com/thoughtbot/administrate/blob/v0.18.0/app/helpers/administrate/application_helper.rb#L72-L78
@@ -33,29 +28,23 @@ module AdministrateRansack
 
     private
 
-    def set_flash_message_as_ransack_argument_error(error)
-      if error.message.eql?("Invalid sorting parameter provided")
-        flash.now[:alert] = I18n.t(
-          :invalid_sorting_parameter_provided,
-          scope: [:administrate_ransack, :errors],
-          default: error.message
-        )
-      elsif error.message.start_with?("Invalid search term ")
-        flash.now[:alert] = I18n.t(
-          :invalid_search_term,
-          search_term: error.message.split(' ')[3..].join(' '),
-          scope: [:administrate_ransack, :errors],
-          default: error.message
-        )
+    def prepare_search(resource_collection:, query_params:, options:)
+      resource_collection.ransack(query_params, **options)
+    rescue ArgumentError => e
+      if defined?(Ransack::InvalidSearchError) && e.is_a?(Ransack::InvalidSearchError) # rubocop:disable Style/GuardClause
+        ransack_invalid_search_error(e)
+        resource_collection.ransack({}, **options)
+      else
+        raise e
       end
     end
 
-    def handle_ransack_argument_error(error)
-      super if defined?(super)
-    end
-
-    def reset_ransack_result_on_error(super_scoped_resource)
-      super_scoped_resource.none
+    def ransack_invalid_search_error(error)
+      if respond_to?(:invalid_search_callback, true)
+        invalid_search_callback(error)
+      else
+        flash.now[:alert] = I18n.t('administrate_ransack.errors.invalid_search', default: error.message)
+      end
     end
   end
 end
