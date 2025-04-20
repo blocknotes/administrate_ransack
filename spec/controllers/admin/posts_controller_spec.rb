@@ -8,11 +8,26 @@ RSpec.describe Admin::PostsController do
       expect(assigns(:ransack_results)).to be_instance_of Ransack::Search
     end
 
-    context "when ransack_options is defined" do
-      it "raises an exception with an invalid parameter" do
+    context "when an invalid search term is provided" do
+      it "shows an alert message", :aggregate_failures do
+        get :index, params: { "q[title2_cont]" => "test", "q[category_eq]" => "news" }
+
+        expect(assigns(:ransack_results)).to be_instance_of Ransack::Search
+        expect(flash[:alert]).to eq 'Invalid search term title2_cont'
+      end
+    end
+
+    context "when an invalid_search_callback method is defined and an invalid search term is provided" do
+      controller do
+        def invalid_search_callback(error)
+          raise "Some error: #{error.message}"
+        end
+      end
+
+      it "executes the callback method" do
         expect {
           get :index, params: { "q[title2_cont]" => "test" }
-        }.to raise_exception(ArgumentError, 'Invalid search term title2_cont')
+        }.to raise_exception("Some error: Invalid search term title2_cont")
       end
     end
   end
