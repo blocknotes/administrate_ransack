@@ -20,6 +20,10 @@ rails_ver = ENV.fetch('RAILS_VERSION', '')
 rails = eval_version('rails', rails_ver)
 gem(*rails)
 
+ransack_ver = ENV.fetch('RANSACK_VERSION', '')
+ransack = eval_version('ransack', ransack_ver)
+gem(*ransack)
+
 administrate_ver = ENV.fetch('ADMINISTRATE_VERSION', '')
 administrate = eval_version('administrate', administrate_ver)
 gem(*administrate)

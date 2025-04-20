@@ -7,7 +7,7 @@ There are 2 ways to interact with this project:
 1) Using Docker:
 
 ```sh
-make up         # starts the dev services (optional env vars: RUBY / RAILS / ADMINISTRATE)
+make up         # starts the dev services (optional env vars: RUBY / RAILS / RANSACK / ADMINISTRATE)
 make specs      # run the tests (after up)
 make lint       # run the linters (after up)
 make server     # run the server (after up)
@@ -15,7 +15,7 @@ make shell      # open a shell (after up)
 make down       # cleanup (after up)
 
 # Example using specific versions:
-RUBY=3.2 RAILS=7.1 ADMINISTRATE=0.18.0 make up
+RUBY=3.2 RAILS=7.1 RANSACK=4.2.0 ADMINISTRATE=0.18.0 make up
 ```
 
 2) With a local setup:
