@@ -16,5 +16,9 @@ services:
     working_dir: /app
     volumes:
       - ..:/app
+      - bundle:/usr/local/bundle
     stdin_open: true
     tty: true
+
+volumes:
+  bundle:
