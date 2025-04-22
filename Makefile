@@ -13,20 +13,24 @@ help:
 # System commands
 
 build:
-	@rm -f Gemfile.lock spec/dummy/db/*.sqlite3
 	@docker compose -f extra/docker-compose.yml build
 
+bundle_install:
+	@rm -f Gemfile.lock
+	@docker compose -f extra/docker-compose.yml run --rm app bundle install
+
 db_reset:
+	@rm -f spec/dummy/db/*.sqlite3
 	@docker compose -f extra/docker-compose.yml run --rm app bin/rails db:create db:migrate db:test:prepare
 
-up: build db_reset
+up: build bundle_install db_reset
 	@docker compose -f extra/docker-compose.yml up
 
 shell:
 	@docker compose -f extra/docker-compose.yml exec app bash
 
 down:
-	@docker compose -f extra/docker-compose.yml down --volumes --rmi local --remove-orphans
+	@docker compose -f extra/docker-compose.yml down --rmi local --remove-orphans
 
 # App commands
 
