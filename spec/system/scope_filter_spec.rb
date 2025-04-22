@@ -3,8 +3,12 @@
 RSpec.describe 'Scope filter' do
   let(:posts) { Post.where(category: 'news') }
 
+  before do
+    SpecHelpers.setup_data
+  end
+
   it 'filters the posts by category (using the scope)', :aggregate_failures do
-    visit '/admin/posts'
+    visit admin_posts_path
 
     fill_in('q[by_category]', with: 'news')
     find('input[type="submit"]').click

@@ -37,12 +37,13 @@ end
 module SpecHelpers
   class << self
     def setup_data
-      Rails.application.load_seed
-      author = Author.find_by!(name: 'A test author')
-      tag = Tag.find_by!(name: 'A test tag')
-      Post.first.update!(title: 'A post', author: author, category: 'news', published: true, dt: Time.zone.today)
-      Post.second.update!(title: 'Another post', author: author, category: 'story', dt: Date.yesterday, tags: [tag])
-      Post.third.update!(title: 'Last post', author: author, category: 'news', position: 234, dt: Date.tomorrow)
+      author1 = Author.create!(name: 'First author', email: 'aaa@bbb.ccc', age: 33)
+      author2 = Author.create!(name: 'Second author', email: 'bbb@ccc.ddd', age: 42)
+      tag = Tag.create!(name: 'A test tag')
+      Post.create!(title: 'A post', author: author1, category: 'news', published: true, dt: Time.zone.today)
+      Post.create!(title: 'Another post', author: author1, category: 'story', dt: Date.yesterday, tags: [tag])
+      Post.create!(title: 'Last post', author: author1, category: 'news', position: 234, dt: Date.tomorrow)
+      Post.create!(title: 'More post', author: author2, category: 'gallery', dt: Date.yesterday)
     end
   end
 end
@@ -60,10 +61,6 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.use_instantiated_fixtures = false
   config.render_views = false
-
-  config.before(:suite) do
-    SpecHelpers.setup_data
-  end
 
   config.before(:suite) do
     require 'administrate/version'
