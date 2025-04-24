@@ -116,7 +116,9 @@ end
 
 ## Customizations
 
-- Ransack options can be customized defining a `ransack_options` method in the controller, example:
+- Ransack options can be changed defining a method `ransack_options` in the resource controller
+- The Ransack results by default use _distinct_, to change this behavior it is possible to define a `ransack_result_distinct` method
+- When a search term is not recognized a flash alert is shown (using a value from locales at `administrate_ransack.errors.invalid_search`), a custom behavior can be apply defining a method `invalid_search_callback`
 
 ```rb
 module Admin
@@ -126,6 +128,15 @@ module Admin
     def ransack_options
       # raises an exception on unknown parameters
       { ignore_unknown_conditions: false }
+    end
+
+    def ransack_result_distinct
+      # disable distinct
+      false
+    end
+
+    def invalid_search_callback(e)
+      raise e
     end
   end
 end
