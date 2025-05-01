@@ -8,7 +8,7 @@ class ApplicationRecord < ActiveRecord::Base
   scope :published, -> {}
 
   class << self
-    if Gem::Version.new(Ransack::VERSION) >= Gem::Version.new("4.1.1")
+    if Gem::Version.new(Ransack::VERSION) >= Gem::Version.new("4.0.0")
       def ransackable_attributes(auth_object = nil)
         authorizable_ransackable_attributes
       end
