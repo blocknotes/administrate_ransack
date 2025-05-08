@@ -63,7 +63,6 @@ gem 'rubocop-packaging'
 gem 'rubocop-performance'
 gem 'rubocop-rails'
 gem 'rubocop-rspec'
-gem 'rubocop-rspec_rails'
 
 # Tools
 gem 'pry-rails'

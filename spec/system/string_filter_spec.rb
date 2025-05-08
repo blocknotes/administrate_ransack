@@ -9,7 +9,9 @@ RSpec.describe 'String filter' do
     visit admin_posts_path
 
     fill_in('q[title_cont]', with: 'another')
-    find('input[type="submit"]').click
+    within('.filters-buttons') do
+      click_on('Search')
+    end
 
     expect(page).to have_current_path %r{/admin/posts?.*q%5Btitle_cont%5D=another}
     expect(page).to have_css('.js-table-row', count: 1)

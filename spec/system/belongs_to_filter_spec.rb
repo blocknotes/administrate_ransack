@@ -13,7 +13,9 @@ RSpec.describe 'Belongs to filter' do
 
     find('.filter-author .selectize-input').click
     find(".filter-author .option[data-value='#{author.id}']").click
-    find('input[type="submit"]').click
+    within('.filters-buttons') do
+      click_on('Search')
+    end
 
     expected_param = CGI.escape("q[author_id_eq]")
     expect(page).to have_current_path %r{/admin/posts\?.*#{expected_param}=#{author.id}}

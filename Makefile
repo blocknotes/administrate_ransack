@@ -21,7 +21,7 @@ bundle_install:
 
 db_reset:
 	@rm -f spec/dummy/db/*.sqlite3
-	@docker compose -f extra/docker-compose.yml run --rm app bin/rails db:create db:migrate db:test:prepare
+	@docker compose -f extra/docker-compose.yml run --rm app bin/rails db:create db:migrate db:seed db:test:prepare
 
 up: build bundle_install db_reset
 	@docker compose -f extra/docker-compose.yml up
@@ -34,16 +34,13 @@ down:
 
 # App commands
 
-seed:
-	@docker compose -f extra/docker-compose.yml exec app bin/rails db:seed
-
-console: seed
+console:
 	@docker compose -f extra/docker-compose.yml exec app bin/rails console
 
 lint:
 	@docker compose -f extra/docker-compose.yml exec app bin/rubocop
 
-server: seed
+server:
 	@rm -f spec/dummy/tmp/pids/server.pid
 	@docker compose -f extra/docker-compose.yml exec app bin/rails server -b 0.0.0.0 -p ${SERVER_PORT}
 
