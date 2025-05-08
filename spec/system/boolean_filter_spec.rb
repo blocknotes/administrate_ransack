@@ -10,7 +10,9 @@ RSpec.describe 'Boolean filter' do
 
     find('.filter-published .selectize-input').click
     find('.filter-published .option[data-value="true"]').click
-    find('input[type="submit"]').click
+    within('.filters-buttons') do
+      click_on('Search')
+    end
 
     expect(page).to have_current_path %r{/admin/posts\?.+q%5Bpublished_eq%5D=true.*}
     expect(page).to have_css('a.action-show', text: "A post")

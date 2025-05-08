@@ -66,4 +66,8 @@ class TagDashboard < Administrate::BaseDashboard
   # def display_resource(tag)
   #   "Tag ##{tag.id}"
   # end
+
+  RANSACK_SEARCH = {
+    posts: :has_many
+  }
 end
