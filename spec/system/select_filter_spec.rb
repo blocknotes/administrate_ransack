@@ -10,7 +10,9 @@ RSpec.describe 'Select filter' do
 
     find('.filter-category .selectize-input').click
     find('.filter-category .option[data-value="story"]').click
-    find('input[type="submit"]').click
+    within('.filters-buttons') do
+      click_on('Search')
+    end
 
     expect(page).to have_current_path %r{/admin/posts\?.+q%5Bcategory_eq%5D=story.*}
     expect(page).to have_css('.js-table-row', count: 1)

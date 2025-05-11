@@ -5,16 +5,18 @@ require 'capybara/cuprite'
 Capybara.register_driver(:capybara_cuprite) do |app|
   browser_options = {}.tap do |opts|
     opts['no-sandbox'] = nil if ENV['DEVEL']
+    opts['log-level'] = 1
   end
 
   Capybara::Cuprite::Driver.new(
     app,
-    window_size: [1600, 1024],
     browser_options: browser_options,
+    headless: !ENV['CUPRITE_HEADLESS'].in?(%w[n 0 no false]),
+    # logger: $stderr,
+    js_errors: true,
     process_timeout: 30,
     timeout: 30,
-    inspector: true,
-    headless: !ENV['CUPRITE_HEADLESS'].in?(%w[n 0 no false])
+    window_size: [1600, 1024]
   )
 end
 

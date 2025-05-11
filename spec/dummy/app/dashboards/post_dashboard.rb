@@ -99,4 +99,40 @@ class PostDashboard < Administrate::BaseDashboard
   # def display_resource(post)
   #   "Post ##{post.id}"
   # end
+
+  RANSACK_SEARCH = {
+    author: {
+      type: :belongs_to,
+      label: "Author"
+    },
+    category: {
+      type: :select,
+      collection: -> { Post.categories }
+      # collection: Post.categories
+    },
+    title: {
+      type: :string,
+      # param: :title_eq,
+      # label: "Some title"
+    },
+    title2: {
+      type: :string,
+      param: :title_eq,
+      label: "Strict title"
+    },
+    published: :boolean,
+    position: :number,
+    by_category: {
+      type: :string,
+      scope: true
+    },
+    dt: :date,
+    tags: {
+      type: :has_many,
+      label: "Tags",
+      select: true
+    }
+  }.freeze
+
+  # RANSACK_SEARCH = %i[title published dt].freeze
 end

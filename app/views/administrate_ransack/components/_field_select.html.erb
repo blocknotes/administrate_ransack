@@ -1,5 +1,5 @@
-<% field_key = model.ransackable_scopes.include?(field) ? field : "#{field}_eq" %>
-<% collection = (type.respond_to?(:options) ? type.options[:collection] : []) || [] %>
-
-<%= form.label(label, class: 'filter-label') %>
-<%= form.select(field_key, collection, include_blank: true) %>
+<div class="filter filter-<%= field.to_s.parameterize %> <%= type %>">
+  <% collection = options[:collection]&.respond_to?(:call) ? options[:collection].call : options[:collection] %>
+  <%= form.label(options[:label], class: 'filter-label') %>
+  <%= form.select(options[:param], collection || [], include_blank: true) %>
+</div>
