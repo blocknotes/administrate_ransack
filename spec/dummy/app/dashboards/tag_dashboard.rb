@@ -24,6 +24,8 @@ class TagDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     id
     name
+    created_at
+    updated_at
     posts
   ].freeze
   # post_tags
@@ -66,4 +68,15 @@ class TagDashboard < Administrate::BaseDashboard
   # def display_resource(tag)
   #   "Tag ##{tag.id}"
   # end
+
+  RANSACK_SEARCH = {
+    posts: :has_many,
+    created_at: {
+      type: :date
+    },
+    updated_at: {
+      type: :date,
+      range: false
+    }
+  }
 end

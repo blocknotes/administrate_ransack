@@ -10,7 +10,9 @@ RSpec.describe 'Date filter' do
 
     date = Date.tomorrow
     fill_in('q[dt_gteq]', with: date)
-    find('input[type="submit"]').click
+    within('.filters-buttons') do
+      click_on('Search')
+    end
 
     expect(page).to have_current_path %r{/admin/posts\?.+q%5Bdt_gteq%5D=#{date}.*}
     expect(page).to have_css('.js-table-row', count: 1)

@@ -1,6 +1,7 @@
-<%= form.label(label, class: 'filter-label') %>
-<%= form.search_field(field) %>
-
+<div class="filter filter-<%= field.to_s.parameterize %> <%= type %>">
+  <%= form.label(options[:label], class: 'filter-label') %>
+  <%= form.search_field(options[:param]) %>
+</div>
 <%# unsupported Field::HasOne %>
 <%# unsupported Field::Polymorphic %>
 <%# unsupported Field::Password %>

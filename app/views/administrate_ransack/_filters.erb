@@ -1,0 +1,51 @@
+<% content_for(:stylesheet) do %>
+<style>
+  .main-content__header {
+    display: grid;
+  }
+  .main-content__header > div {
+    text-align: right;
+  }
+  .main-content__header > .ransack-search {
+    order: 2;
+    text-align: initial;
+  }
+
+  .ransack-search form {
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 4px;
+  }
+
+  .ransack-search .filter > * {
+    margin-bottom: 4px;
+  }
+
+  .ransack-search .ransack-controls {
+    text-align: right;
+    margin: auto 0;
+  }
+
+  .ransack-search .selectize-input {
+    min-height: 39px;
+  }
+</style>
+<% end %>
+
+<% render 'administrate_ransack/javascript' %>
+
+<div class="ransack-search">
+  <% form_path = [namespace, @ransack_results] %>
+  <%= search_form_for(form_path, html: { 'data-administrate-ransack-filters': '1' }) do |f| %>
+    <% @fields.each do |field, data| %>
+      <% type = data.delete(:type) %>
+      <% attrs = { form: f, model: @model, field: field, type: type, options: data[:options] } %>
+      <%= render "administrate_ransack/components/field_#{type}", attrs %>
+    <% end %>
+
+    <%= render 'administrate_ransack/components/filter_buttons', form: f %>
+  <% end %>
+</div>
