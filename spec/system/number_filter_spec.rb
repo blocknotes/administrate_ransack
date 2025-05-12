@@ -9,7 +9,9 @@ RSpec.describe 'Number filter' do
     visit admin_posts_path
 
     fill_in('q[position_eq]', with: '234')
-    find('input[type="submit"]').click
+    within('.filters-buttons') do
+      click_on('Search')
+    end
 
     expect(page).to have_current_path %r{/admin/posts\?.+q%5Bposition_eq%5D=234.*}
     expect(page).to have_css('.js-table-row', count: 1)

@@ -1,7 +1,9 @@
-<%= form.label(label, class: 'filter-label') %>
-<% if model.ransackable_scopes.include?(field) %>
-  <%= form.datetime_field(field, value: form.object.send(field)) %>
-<% else %>
-  <%= form.datetime_field("#{field}_gteq") %>
-  <%= form.datetime_field("#{field}_lteq") %>
-<% end %>
+<div class="filter filter-<%= field.to_s.parameterize %> <%= type %>">
+  <%= form.label(options[:label], class: 'filter-label') %>
+  <% if options[:range] %>
+    <%= form.datetime_field("#{field}_gteq") %>
+    <%= form.datetime_field("#{field}_lteq") %>
+  <% else %>
+    <%= form.datetime_field(options[:param], value: form.object.send(field)) %>
+  <% end %>
+</div>

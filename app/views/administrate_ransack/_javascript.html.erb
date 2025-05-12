@@ -1,5 +1,8 @@
 <% content_for :javascript do %>
+  <!-- [JS] -->
   <script>
+    console.error('JS error!');
+
     document.addEventListener('DOMContentLoaded', (_event) => {
       // flatpickr setup
       if(typeof window.flatpickr === 'function') {
@@ -10,7 +13,7 @@
 
       // selectize setup
       $(function () {
-        $('.filters select').selectize();
+        $('.ransack-search select').selectize();
       });
     });
   </script>
